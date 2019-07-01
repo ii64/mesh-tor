@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   t_img:
-    build: ../front-proxy
+    build: ./front-proxy
     links:
       - tor-s
     environment:
@@ -15,7 +15,7 @@ services:
       - "18080:8080"
 
   i_img:
-     build: ../front-proxy
+     build: ./front-proxy
      links:
        - tor-s
      environment:
@@ -28,7 +28,7 @@ services:
       - "18081:8080"
     
   tor-s:
-    build: .
+    build: ./tor-s
     expose:
      - "5000"
      - "9050"
