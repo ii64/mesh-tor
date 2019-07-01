@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+if [ $# -ne 0 ] ; then
+	exec $@
+fi
+
+set -euo pipefail
+
+#envsubst < "/torrc.template" > "${TOR_HOME}/torrc"
+#cp -a /torrc.template "${TOR_HOME/torrc}"
+
+mkdir -p "${TOR_HOME}/hidden_service/"
+exec polipo -c /polipo.config &
+exec tor -f "/torrc.template"

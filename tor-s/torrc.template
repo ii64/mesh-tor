@@ -1,0 +1,6 @@
+SocksPort 0.0.0.0:9050
+
+AutomapHostsOnResolve 1
+TransPort 9040
+DNSPort 5353
+# HTTPTunnelPort 0.0.0.0:5000

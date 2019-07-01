@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+if [ $# -ne 0 ] ; then
+        exec $@
+fi
+
+set -euo pipefail
+
+go build -o /bin/proxy_main /proxy_main.go
+chmod +x /bin/proxy_main
+
+exec proxy_main
