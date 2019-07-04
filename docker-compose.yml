@@ -45,7 +45,7 @@ services:
      networks:
       - backend
      environment:
-      - PROXY_SERVICE=socks5://tor-s:9050
+      - PROXY_SERVICE=socks5://tors:9050
       - DST_SERVICE=https://i.nhentai.net
       - SERVICE_ADDR=0.0.0.0:8080
      expose:
