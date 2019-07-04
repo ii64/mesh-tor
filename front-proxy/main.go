@@ -73,7 +73,9 @@ func main() {
         }else{
             w.WriteHeader(res.StatusCode)
             for k, v := range res.Header {
-                w.Header().Set(k, v[0])
+                for _, vN := range v {
+                    w.Header().Set(k, vN)
+                }
             }
             w.Header().Set("Node-IP", proxy_node)
             defer res.Body.Close()
