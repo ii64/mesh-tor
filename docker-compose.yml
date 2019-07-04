@@ -1,12 +1,38 @@
 version: '3.0'
 
 services:
+  check_ip:
+    build: ./front-proxy
+    networks:
+      - backend
+    environment:
+      - PROXY_SERVICE=socks5://tors:9050
+      - DST_SERVICE=http://ifconfig.me
+      - SERVICE_ADDR=0.0.0.0:8080
+    expose:
+      - "8080"
+    ports:
+      - "19090:8080"
+
+  iinstagram:
+    build: ./front-proxy
+    networks:
+       - backend
+    environment:
+      - PROXY_SERVICE=socks5://tors:9050
+      - DST_SERVICE=https://i.instagram.com
+      - SERVICE_ADDR=0.0.0.0:8080
+    expose:
+      - "8080"
+    ports:
+      - "19091:8080"
+
   t_img:
     build: ./front-proxy
-    links:
-      - tor-s
+    networks:
+      - backend
     environment:
-      - PROXY_SERVICE=socks5://tor-s:9050
+      - PROXY_SERVICE=socks5://tors:9050
       - DST_SERVICE=https://t.nhentai.net
       - SERVICE_ADDR=0.0.0.0:8080
     expose:
@@ -16,8 +42,8 @@ services:
 
   i_img:
      build: ./front-proxy
-     links:
-       - tor-s
+     networks:
+      - backend
      environment:
       - PROXY_SERVICE=socks5://tor-s:9050
       - DST_SERVICE=https://i.nhentai.net
@@ -27,8 +53,16 @@ services:
      ports:
       - "18081:8080"
     
-  tor-s:
+  tor:
     build: ./tor-s
+    networks:
+       backend:
+         aliases:
+          - tors
     expose:
      - "5000"
      - "9050"
+
+
+networks:
+  backend: {}
