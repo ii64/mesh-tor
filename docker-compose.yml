@@ -3,6 +3,7 @@ version: '3.0'
 services:
   check_ip:
     build: ./front-proxy
+    restart: always
     networks:
       - backend
     environment:
@@ -16,6 +17,7 @@ services:
 
   iinstagram:
     build: ./front-proxy
+    restart: always
     networks:
        - backend
     environment:
@@ -29,6 +31,7 @@ services:
 
   t_img:
     build: ./front-proxy
+    restart: always
     networks:
       - backend
     environment:
@@ -42,6 +45,7 @@ services:
 
   i_img:
      build: ./front-proxy
+     restart: always
      networks:
       - backend
      environment:
