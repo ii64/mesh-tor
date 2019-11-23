@@ -29,6 +29,32 @@ services:
     ports:
       - "19091:8080"
 
+  main_svc:
+    build: ./front-proxy
+    restart: always
+    networks:
+      - backend
+    environment:
+      - PROXY_SERVICE=socks5://tors:9050
+      - DST_SERVICE=https://nhentai.net
+      - SERVICE_ADDR=0.0.0.0:8080
+    expose:
+      - "8080"
+    ports:
+      - "16060:8080"
+  static_svc:
+    build: ./front-proxy
+    restart: always
+    networks:
+      - backend
+    environment:
+      - PROXY_SERVICE=socks5://tors:9050
+      - DST_SERVICE=https://static.nhentai.net
+      - SERVICE_ADDR=0.0.0.0:8080
+    expose:
+      - "8080"
+    ports:
+      - "16061:8080"
   t_img:
     build: ./front-proxy
     restart: always
